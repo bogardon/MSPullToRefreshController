@@ -3,6 +3,10 @@
 #### Authors
 Me and [Tim Lee](https://github.com/timothy1ee)
 
+#### Pull To Refresh Demo
+I've put together a simple sample project that recreates our familiar rainbow loading in the [Miso App](http://itunes.apple.com/us/app/miso-social-tv/id352823603?mt=8).
+The sample artificially creates async work by finding the next largest prime and putting the results into a regular uitableview.
+
 #### Features
 * does not steal your scrollview's delegate (intrusive), but merely observes the scrollview's contentOffset property (non-intrusive)
 * allows refreshing in all 4 directions (pull down to refresh, pull up to load more?)
