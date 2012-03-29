@@ -38,7 +38,7 @@
 }
 
 - (BOOL) isPrime:(unsigned long long)input {
-    for (unsigned long long i = 2; i < input/2; i++) {
+    for (unsigned long long i = 2; i < input/2+1; i++) {
         if (input % i == 0)
             return NO;
     }
