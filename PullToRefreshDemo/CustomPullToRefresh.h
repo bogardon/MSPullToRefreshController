@@ -14,7 +14,7 @@
 @interface CustomPullToRefresh : NSObject <MSPullToRefreshDelegate> {
     UIImageView *_rainbow;
     UIImageView *_arrow;
-    MSPullToRefreshController *_ptfc;
+    MSPullToRefreshController *_ptrc;
     
     id <CustomPullToRefreshDelegate> _delegate;
 }
@@ -26,6 +26,6 @@
 
 @protocol CustomPullToRefreshDelegate <NSObject>
 
-- (void) customPullToRefreshShouldRefresh:(CustomPullToRefresh *)ptf;
+- (void) customPullToRefreshShouldRefresh:(CustomPullToRefresh *)ptr;
 
 @end

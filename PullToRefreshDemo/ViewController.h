@@ -12,7 +12,7 @@
 @interface ViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, CustomPullToRefreshDelegate> {
     UITableView *_table;
     NSMutableArray *_primes;
-    CustomPullToRefresh *_ptf;
+    CustomPullToRefresh *_ptr;
 }
 
 - (BOOL) isPrime:(unsigned long long)input;

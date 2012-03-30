@@ -118,7 +118,6 @@
 }
 
 - (void) finishRefreshingDirection:(MSRefreshDirection)direction animated:(BOOL)animated {
-    [_scrollView addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld | NSKeyValueObservingOptionPrior context:NULL];
     MSRefreshingDirections refreshingDirection = MSRefreshingDirectionNone;
     UIEdgeInsets contentInset = _scrollView.contentInset;
     switch (direction) {

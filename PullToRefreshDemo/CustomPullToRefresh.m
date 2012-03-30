@@ -15,7 +15,7 @@
     if (self) {
         _delegate = delegate;
         
-        _ptfc = [[MSPullToRefreshController alloc] initWithScrollView:scrollView delegate:self];
+        _ptrc = [[MSPullToRefreshController alloc] initWithScrollView:scrollView delegate:self];
         
         _rainbow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"loading-1.png"]];
         _rainbow.frame = CGRectMake(0, -scrollView.frame.size.height, scrollView.frame.size.width, scrollView.frame.size.height);
@@ -35,14 +35,14 @@
 }
 
 - (void) dealloc {
-    [_ptfc release];
+    [_ptrc release];
     [_arrow release];
     [_rainbow release];
     [super dealloc];
 }
 
 - (void) endRefresh {
-    [_ptfc finishRefreshingDirection:MSRefreshDirectionTop];
+    [_ptrc finishRefreshingDirection:MSRefreshDirectionTop];
     [_rainbow stopAnimating];
     _arrow.hidden = NO;
     _arrow.transform = CGAffineTransformIdentity;

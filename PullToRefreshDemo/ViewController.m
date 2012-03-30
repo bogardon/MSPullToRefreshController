@@ -22,7 +22,7 @@
 	// Do any additional setup after loading the view, typically from a nib.
     _primes = [[NSMutableArray alloc] initWithObjects:[NSNumber numberWithUnsignedLongLong:2], nil];
     
-    _ptf = [[CustomPullToRefresh alloc] initWithScrollView:self.table delegate:self];
+    _ptr = [[CustomPullToRefresh alloc] initWithScrollView:self.table delegate:self];
         
 }
 
@@ -61,7 +61,7 @@
 }
 
 - (void) endSearch {
-    [_ptf endRefresh];
+    [_ptr endRefresh];
     [self.table reloadData];
 }
 
@@ -89,7 +89,7 @@
 
 #pragma mark - CustomPullToRefresh Delegate Methods
 
-- (void) customPullToRefreshShouldRefresh:(CustomPullToRefresh *)ptf {
+- (void) customPullToRefreshShouldRefresh:(CustomPullToRefresh *)ptr {
     [self performSelectorInBackground:@selector(findNextPrime) withObject:nil];
 }
 
