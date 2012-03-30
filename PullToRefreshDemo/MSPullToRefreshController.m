@@ -117,8 +117,9 @@
 
     self.refreshingDirections |= refreshingDirection;
     self.refreshableDirections &= ~refreshableDirection;
-    [_delegate pullToRefreshController:self didEngageRefreshDirection:direction];
-
+    if ([_delegate respondsToSelector:@selector(pullToRefreshController:didEngageRefreshDirection:)]) {
+        [_delegate pullToRefreshController:self didEngageRefreshDirection:direction];
+    }
 }
 
 - (void) finishRefreshingDirection:(MSRefreshDirection)direction {
