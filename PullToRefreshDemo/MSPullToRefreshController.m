@@ -69,6 +69,7 @@
 
 - (void) startRefreshingDirection:(MSRefreshDirection)direction animated:(BOOL)animated {
     MSRefreshingDirections refreshingDirection = MSRefreshingDirectionNone;
+    MSRefreshableDirections refreshableDirection = MSRefreshableDirectionNone;
     UIEdgeInsets contentInset = _scrollView.contentInset;
     CGPoint contentOffset = CGPointZero;
 
@@ -76,21 +77,25 @@
 
     switch (direction) {
         case MSRefreshDirectionTop:
+            refreshableDirection = MSRefreshableDirectionTop;
             refreshingDirection = MSRefreshingDirectionTop;
             contentInset = UIEdgeInsetsMake(refreshingInset, contentInset.left, contentInset.bottom, contentInset.right);
             contentOffset = CGPointMake(0, -refreshingInset);
             break;
         case MSRefreshDirectionLeft:
+            refreshableDirection = MSRefreshableDirectionLeft;
             refreshingDirection = MSRefreshingDirectionLeft;
             contentInset = UIEdgeInsetsMake(contentInset.top, refreshingInset, contentInset.bottom, contentInset.right);
             contentOffset = CGPointMake(-refreshingInset, 0);
             break;
         case MSRefreshDirectionBottom:
+            refreshableDirection = MSRefreshableDirectionBottom;
             refreshingDirection = MSRefreshingDirectionBottom;
             contentInset = UIEdgeInsetsMake(contentInset.top, contentInset.left, refreshingInset, contentInset.right);
             contentOffset = CGPointMake(0, _scrollView.contentSize.height + refreshingInset);
             break;
         case MSRefreshDirectionRight:
+            refreshableDirection = MSRefreshableDirectionRight;
             refreshingDirection = MSRefreshingDirectionRight;
             contentInset = UIEdgeInsetsMake(contentInset.top, contentInset.left, contentInset.bottom, refreshingInset);
             contentOffset = CGPointMake(_scrollView.contentSize.width + refreshingInset, 0);
@@ -111,6 +116,9 @@
     }
 
     self.refreshingDirections |= refreshingDirection;
+    self.refreshableDirections &= ~refreshableDirection;
+    [_delegate pullToRefreshController:self didEngageRefreshDirection:direction];
+
 }
 
 - (void) finishRefreshingDirection:(MSRefreshDirection)direction {
@@ -207,16 +215,22 @@
                 self.refreshingDirections |= refreshingDirection;
                 self.refreshableDirections &= ~refreshableDirection;
                 _scrollView.contentInset = contentInset;
-                [_delegate pullToRefreshController:self didEngageRefreshDirection:direction];
+                if ([_delegate respondsToSelector:@selector(pullToRefreshController:didEngageRefreshDirection:)]) {
+                    [_delegate pullToRefreshController:self didEngageRefreshDirection:direction];
+                }
             } else if (_scrollView.dragging && !_scrollView.decelerating && !(self.refreshableDirections & refreshableDirection)) {
                 // only go in here the first time you've dragged past releasable offset
                 self.refreshableDirections |= refreshableDirection;
-                [_delegate pullToRefreshController:self canEngageRefreshDirection:direction];
+                if ([_delegate respondsToSelector:@selector(pullToRefreshController:canEngageRefreshDirection:)]) {
+                    [_delegate pullToRefreshController:self canEngageRefreshDirection:direction];
+                }
             }
         } else if ((self.refreshableDirections & refreshableDirection) ) {
             // if you're here it means you've crossed back from the releasable offset
             self.refreshableDirections &= ~refreshableDirection;
-            [_delegate pullToRefreshController:self didDisengageRefreshDirection:direction];
+            if ([_delegate respondsToSelector:@selector(pullToRefreshController:didDisengageRefreshDirection:)]) {
+                [_delegate pullToRefreshController:self didDisengageRefreshDirection:direction];
+            }
         }
     }
 

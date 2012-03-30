@@ -16,19 +16,33 @@
 @implementation ViewController
 @synthesize table = _table;
 
+- (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        _primes = [[NSMutableArray alloc] initWithObjects:[NSNumber numberWithUnsignedLongLong:2], nil];
+    }
+    return self;
+}
+
+- (void) dealloc {
+    [_table release];
+    [_primes release];
+    [_ptr release];
+    [super dealloc];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    _primes = [[NSMutableArray alloc] initWithObjects:[NSNumber numberWithUnsignedLongLong:2], nil];
     
     _ptr = [[CustomPullToRefresh alloc] initWithScrollView:self.table delegate:self];
-        
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
+    [_ptr release], _ptr = nil;
     // Release any retained subviews of the main view.
 }
 

@@ -48,6 +48,10 @@
     _arrow.transform = CGAffineTransformIdentity;
 }
 
+- (void) startRefresh {
+    [_ptrc startRefreshingDirection:MSRefreshDirectionTop];
+}
+
 #pragma mark - MSPullToRefreshDelegate Methods
 
 - (BOOL) pullToRefreshController:(MSPullToRefreshController *)controller canRefreshInDirection:(MSRefreshDirection)direction {
