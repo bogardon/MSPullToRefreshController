@@ -209,7 +209,7 @@
                 self.refreshableDirections &= ~refreshableDirection;
                 _scrollView.contentInset = contentInset;
                 [_delegate pullToRefreshController:self didEngageRefreshDirection:direction];
-            } else if (_scrollView.dragging && !(self.refreshableDirections & refreshableDirection)) {
+            } else if (_scrollView.dragging && !_scrollView.decelerating && !(self.refreshableDirections & refreshableDirection)) {
                 // only go in here the first time you've dragged past releasable offset
                 self.refreshableDirections |= refreshableDirection;
                 [_delegate pullToRefreshController:self canEngageRefreshDirection:direction];
