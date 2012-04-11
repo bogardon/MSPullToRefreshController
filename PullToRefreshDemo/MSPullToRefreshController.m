@@ -211,7 +211,7 @@
         // only go in here if the requested direction is enabled and not refreshing
         if (canEngage) {
             // only go in here if user pulled past the inflection offset
-            if (_wasDragging != _scrollView.dragging && _scrollView.decelerating && [change objectForKey:NSKeyValueChangeNotificationIsPriorKey]) {
+            if (_wasDragging != _scrollView.dragging && _scrollView.decelerating && [change objectForKey:NSKeyValueChangeNotificationIsPriorKey] && (self.refreshableDirections & refreshableDirection)) {
                 // if you are decelerating, it means you've stopped dragging.
                 self.refreshingDirections |= refreshingDirection;
                 self.refreshableDirections &= ~refreshableDirection;
