@@ -68,3 +68,7 @@ You can also programatically start a refresh cycle in any direction:
 #### Caution
 
 This library will break down if the area of the scrollView's contentSize is smaller (strict) than the area of the scrollView's frame. It is up to the developer to ensure the converse.
+
+#### License
+
+MSPullToRefreshController is available under the MIT license. See the LICENSE file for more info.
