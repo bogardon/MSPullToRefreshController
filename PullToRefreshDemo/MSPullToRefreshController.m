@@ -75,6 +75,10 @@
 
     CGFloat refreshingInset = [_delegate pullToRefreshController:self refreshingInsetForDirection:direction];
 
+    CGFloat contentSizeArea = _scrollView.contentSize.width*_scrollView.contentSize.height;
+    CGFloat frameArea = _scrollView.frame.size.width*_scrollView.frame.size.height;
+    CGSize adjustedContentSize = contentSizeArea < frameArea ? _scrollView.frame.size : _scrollView.contentSize;
+
     switch (direction) {
         case MSRefreshDirectionTop:
             refreshableDirection = MSRefreshableDirectionTop;
@@ -92,13 +96,13 @@
             refreshableDirection = MSRefreshableDirectionBottom;
             refreshingDirection = MSRefreshingDirectionBottom;
             contentInset = UIEdgeInsetsMake(contentInset.top, contentInset.left, refreshingInset, contentInset.right);
-            contentOffset = CGPointMake(0, _scrollView.contentSize.height + refreshingInset);
+            contentOffset = CGPointMake(0, adjustedContentSize.height + refreshingInset);
             break;
         case MSRefreshDirectionRight:
             refreshableDirection = MSRefreshableDirectionRight;
             refreshingDirection = MSRefreshingDirectionRight;
             contentInset = UIEdgeInsetsMake(contentInset.top, contentInset.left, contentInset.bottom, refreshingInset);
-            contentOffset = CGPointMake(_scrollView.contentSize.width + refreshingInset, 0);
+            contentOffset = CGPointMake(adjustedContentSize.width + refreshingInset, 0);
             break;
         default:
             break;
@@ -177,6 +181,10 @@
     CGFloat refreshableInset = [_delegate pullToRefreshController:self refreshableInsetForDirection:direction];
     CGFloat refreshingInset = [_delegate pullToRefreshController:self refreshingInsetForDirection:direction];
 
+    CGFloat contentSizeArea = _scrollView.contentSize.width*_scrollView.contentSize.height;
+    CGFloat frameArea = _scrollView.frame.size.width*_scrollView.frame.size.height;
+    CGSize adjustedContentSize = contentSizeArea < frameArea ? _scrollView.frame.size : _scrollView.contentSize;
+
     switch (direction) {
         case MSRefreshDirectionTop:
             refreshingDirection = MSRefreshingDirectionTop;
@@ -193,25 +201,25 @@
         case MSRefreshDirectionBottom:
             refreshingDirection = MSRefreshingDirectionBottom;
             refreshableDirection = MSRefreshableDirectionBottom;
-            canEngage = oldOffset.y + _scrollView.frame.size.height - _scrollView.contentSize.height  > refreshableInset;
+            canEngage = (oldOffset.y + _scrollView.frame.size.height - adjustedContentSize.height  > refreshableInset);
             contentInset = UIEdgeInsetsMake(contentInset.top, contentInset.left, refreshingInset, contentInset.right);
             break;
         case MSRefreshDirectionRight:
             refreshingDirection = MSRefreshingDirectionRight;
             refreshableDirection = MSRefreshableDirectionRight;
-            canEngage = oldOffset.x + _scrollView.frame.size.width - _scrollView.contentSize.width > refreshableInset;
+            canEngage = oldOffset.x + _scrollView.frame.size.width - adjustedContentSize.width > refreshableInset;
             contentInset = UIEdgeInsetsMake(contentInset.top, contentInset.left, contentInset.bottom, refreshingInset);
             break;
         default:
             break;
     }
 
-
     if (!(self.refreshingDirections & refreshingDirection)) {
         // only go in here if the requested direction is enabled and not refreshing
         if (canEngage) {
             // only go in here if user pulled past the inflection offset
             if (_wasDragging != _scrollView.dragging && _scrollView.decelerating && [change objectForKey:NSKeyValueChangeNotificationIsPriorKey] && (self.refreshableDirections & refreshableDirection)) {
+
                 // if you are decelerating, it means you've stopped dragging.
                 self.refreshingDirections |= refreshingDirection;
                 self.refreshableDirections &= ~refreshableDirection;
