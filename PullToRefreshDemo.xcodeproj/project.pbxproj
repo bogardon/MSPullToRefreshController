@@ -57,6 +57,7 @@
 		721F7A4B151BD94700FA0D5E /* loading-19@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 721F7A25151BD94700FA0D5E /* loading-19@2x.png */; };
 		721F7A4F151BDAD100FA0D5E /* big_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 721F7A4D151BDAD100FA0D5E /* big_arrow.png */; };
 		721F7A50151BDAD100FA0D5E /* big_arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 721F7A4E151BDAD100FA0D5E /* big_arrow@2x.png */; };
+		72664AB2160F18B200B9E819 /* MyTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 72664AB1160F18B200B9E819 /* MyTableView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -117,6 +118,8 @@
 		721F7A25151BD94700FA0D5E /* loading-19@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loading-19@2x.png"; sourceTree = "<group>"; };
 		721F7A4D151BDAD100FA0D5E /* big_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = big_arrow.png; sourceTree = "<group>"; };
 		721F7A4E151BDAD100FA0D5E /* big_arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "big_arrow@2x.png"; sourceTree = "<group>"; };
+		72664AB0160F18B200B9E819 /* MyTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTableView.h; sourceTree = "<group>"; };
+		72664AB1160F18B200B9E819 /* MyTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTableView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +171,8 @@
 				721F79E6151BB5C100FA0D5E /* AppDelegate.m */,
 				721F79F6151BB91100FA0D5E /* CustomPullToRefresh.h */,
 				721F79F7151BB91100FA0D5E /* CustomPullToRefresh.m */,
+				72664AB0160F18B200B9E819 /* MyTableView.h */,
+				72664AB1160F18B200B9E819 /* MyTableView.m */,
 				721F79E8151BB5C100FA0D5E /* ViewController.h */,
 				721F79E9151BB5C100FA0D5E /* ViewController.m */,
 				721F79EB151BB5C100FA0D5E /* ViewController.xib */,
@@ -352,6 +357,7 @@
 				721F79E7151BB5C100FA0D5E /* AppDelegate.m in Sources */,
 				721F79EA151BB5C100FA0D5E /* ViewController.m in Sources */,
 				721F79F8151BB91100FA0D5E /* CustomPullToRefresh.m in Sources */,
+				72664AB2160F18B200B9E819 /* MyTableView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -463,6 +469,7 @@
 				721F79F2151BB5C100FA0D5E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -12,9 +12,12 @@
 @protocol CustomPullToRefreshDelegate;
 
 @interface CustomPullToRefresh : NSObject <MSPullToRefreshDelegate> {
-    UIImageView *_rainbow;
-    UIImageView *_arrow;
+    UIImageView *_rainbowTop;
+    UIImageView *_arrowTop;
+    UIImageView *_rainbowBot;
+    UIImageView *_arrowBot;
     MSPullToRefreshController *_ptrc;
+    UIScrollView *_scrollView;
     
     id <CustomPullToRefreshDelegate> _delegate;
 }
