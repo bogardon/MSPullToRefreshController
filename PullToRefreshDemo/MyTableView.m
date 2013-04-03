@@ -20,9 +20,9 @@
 }
 
 - (void) setContentSize:(CGSize)contentSize {
-    CGFloat contentSizeArea = self.contentSize.width*self.contentSize.height;
+    CGFloat contentSizeArea = contentSize.width*contentSize.height;
     CGFloat frameArea = self.frame.size.width*self.frame.size.height;
-    CGSize adjustedContentSize = contentSizeArea < frameArea ? self.frame.size : self.contentSize;
+    CGSize adjustedContentSize = contentSizeArea < frameArea ? self.frame.size : contentSize;
     [super setContentSize:adjustedContentSize];
 }
 
