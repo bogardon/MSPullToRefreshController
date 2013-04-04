@@ -1,4 +1,4 @@
-# [GoMiso's](http://gomiso.com) Pull To Refresh Library
+# [Miso's](http://gomiso.com) Pull To Refresh Library ([blog post here](http://blog.gomiso.com/2012/03/22/yet-another-pull-to-refresh-library/))
 
 #### Authors
 Me and [Tim Lee](https://github.com/timothy1ee)
