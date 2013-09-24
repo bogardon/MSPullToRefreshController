@@ -83,8 +83,9 @@
         case MSRefreshDirectionTop:
             refreshableDirection = MSRefreshableDirectionTop;
             refreshingDirection = MSRefreshingDirectionTop;
-            contentInset = UIEdgeInsetsMake(refreshingInset, contentInset.left, contentInset.bottom, contentInset.right);
-            contentOffset = CGPointMake(0, -refreshingInset);
+            CGFloat originalContentOffsetY = -contentInset.top;
+            contentInset = UIEdgeInsetsMake(contentInset.top + refreshingInset, contentInset.left, contentInset.bottom, contentInset.right);
+            contentOffset = CGPointMake(0, -refreshingInset+originalContentOffsetY);
             break;
         case MSRefreshDirectionLeft:
             refreshableDirection = MSRefreshableDirectionLeft;
@@ -112,6 +113,7 @@
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDuration:0.2];
     }
+    _originalScrollViewContentInset = _scrollView.contentInset;
     _scrollView.contentInset = contentInset;
     _scrollView.contentOffset = contentOffset;
 
@@ -136,7 +138,7 @@
     switch (direction) {
         case MSRefreshDirectionTop:
             refreshingDirection = MSRefreshingDirectionTop;
-            contentInset = UIEdgeInsetsMake(0, contentInset.left, contentInset.bottom, contentInset.right);
+            contentInset = UIEdgeInsetsMake(_originalScrollViewContentInset.top, contentInset.left, contentInset.bottom, contentInset.right);
             break;
         case MSRefreshDirectionLeft:
             refreshingDirection = MSRefreshingDirectionLeft;
@@ -189,8 +191,8 @@
         case MSRefreshDirectionTop:
             refreshingDirection = MSRefreshingDirectionTop;
             refreshableDirection = MSRefreshableDirectionTop;
-            canEngage = oldOffset.y < - refreshableInset;
-            contentInset = UIEdgeInsetsMake(refreshingInset, contentInset.left, contentInset.bottom, contentInset.right);
+            canEngage = oldOffset.y < - refreshableInset - _scrollView.contentInset.top;
+            contentInset = UIEdgeInsetsMake(contentInset.top + refreshingInset, contentInset.left, contentInset.bottom, contentInset.right);
             break;
         case MSRefreshDirectionLeft:
             refreshingDirection = MSRefreshingDirectionLeft;
@@ -223,6 +225,7 @@
                 // if you are decelerating, it means you've stopped dragging.
                 self.refreshingDirections |= refreshingDirection;
                 self.refreshableDirections &= ~refreshableDirection;
+                _originalScrollViewContentInset = _scrollView.contentInset;
                 _scrollView.contentInset = contentInset;
                 if ([_delegate respondsToSelector:@selector(pullToRefreshController:didEngageRefreshDirection:)]) {
                     [_delegate pullToRefreshController:self didEngageRefreshDirection:direction];

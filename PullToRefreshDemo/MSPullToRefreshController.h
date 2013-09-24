@@ -82,6 +82,9 @@ typedef enum {
     
     // used internally to capture the did end dragging state
     BOOL _wasDragging;
+    
+    // scroll view's original content inset before refresh sequence
+    UIEdgeInsets _originalScrollViewContentInset;
 }
 
 /*
