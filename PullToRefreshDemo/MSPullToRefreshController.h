@@ -158,5 +158,10 @@ typedef enum {
  */
 - (void) pullToRefreshController:(MSPullToRefreshController *) controller didEngageRefreshDirection:(MSRefreshDirection) direction;
 
+/*
+ * asks the delegate if the contentinset change (refreshable -> refreshing) must be performed inside an animation. Default value is no animated.
+ */
+
+- (BOOL) pullToRefreshController:(MSPullToRefreshController *)controller shouldAnimateRefreshingInsetForDirection:(MSRefreshDirection)direction;
 
 @end
