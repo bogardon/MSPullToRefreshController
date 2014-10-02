@@ -142,15 +142,15 @@
             break;
         case MSRefreshDirectionLeft:
             refreshingDirection = MSRefreshingDirectionLeft;
-            contentInset = UIEdgeInsetsMake(contentInset.top, 0, contentInset.bottom, contentInset.right);
+            contentInset = UIEdgeInsetsMake(contentInset.top, _originalScrollViewContentInset.left, contentInset.bottom, contentInset.right);
             break;
         case MSRefreshDirectionBottom:
             refreshingDirection = MSRefreshingDirectionBottom;
-            contentInset = UIEdgeInsetsMake(contentInset.top, contentInset.left, 0, contentInset.right);
+            contentInset = UIEdgeInsetsMake(contentInset.top, contentInset.left, _originalScrollViewContentInset.top, contentInset.right);
             break;
         case MSRefreshDirectionRight:
             refreshingDirection = MSRefreshingDirectionRight;
-            contentInset = UIEdgeInsetsMake(contentInset.top, contentInset.left, contentInset.bottom, 0);
+            contentInset = UIEdgeInsetsMake(contentInset.top, contentInset.left, contentInset.bottom, _originalScrollViewContentInset.right);
             break;
         default:
             break;
